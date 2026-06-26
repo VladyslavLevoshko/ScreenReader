@@ -1,0 +1,14 @@
+Here MVP Electron`s app on TypeScript.
+Open console to check answer from main process 'pong', here we have onle one function ping-pong
+to check comunicate between main and renderer process.
+Below I`ll write some add infromation which can be important.
+
+IPC calls returns promises.
+21 vulnerabilities (3 low, 18 high) was added from Electron Forge CLI
+
+makers: [
+  {
+    name: "@electron-forge/maker-rpm"
+  }
+]
+was deleted because my machine don`t have rpm maker
