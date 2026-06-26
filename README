@@ -12,3 +12,11 @@ makers: [
   }
 ]
 was deleted because my machine don`t have rpm maker
+
+use this link to copy 
+https://github.com/VladyslavLevoshko/MVP-Electron-App.git
+
+then ts to js by npx tsc
+you can check is it work using npx electron .
+then npm run make to create deb file
+
