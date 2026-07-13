@@ -1,4 +1,4 @@
 export interface RendererAPI {
   ping: () => Promise<string>,
-  sendFile: (file:ArrayBuffer) => Promise<string>
+  processImage: (image:ArrayBuffer) => Promise<string>
 }

@@ -34,9 +34,9 @@ function showPreview(file:File, place:HTMLDivElement){
     renderImage(image, place)
 }
 
-async function sendFileToMainProcess(file:File){
-    let buffer = await file.arrayBuffer();
-    const answer = await window.api.sendFile(buffer)
+async function sendImageToMainProcess(image:File){
+    let buffer = await image.arrayBuffer();
+    const answer = await window.rendererAPI.processImage(buffer)
     console.log(answer)
 }
 
@@ -48,7 +48,7 @@ assertExists(preview, 'Can not find preview element on HTML page');
 input.addEventListener('change', () => {
     const file = getHTMLInputFile(input);
     showPreview(file, preview);
-    sendFileToMainProcess(file)
+    sendImageToMainProcess(file);
 });
 
 preview.addEventListener('dragover', (event) => {
@@ -70,4 +70,5 @@ preview.addEventListener('drop', (event) => {
     const file = event.dataTransfer?.files[0];
     assertExists(file, 'file not found')
     showPreview(file, preview);
+    sendImageToMainProcess(file);
 });

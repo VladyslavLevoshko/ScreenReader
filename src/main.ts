@@ -16,7 +16,7 @@ const createWindow = () => {
 app.whenReady().then(createWindow);
 
 ipcMain.handle('ping', () => 'pong');
-ipcMain.handle('SendFile', (_event, arrayBuffer:ArrayBuffer ) => {
+ipcMain.handle('sendImage', (_event, arrayBuffer:ArrayBuffer ) => {
   return arrayBuffer.byteLength
 })
 

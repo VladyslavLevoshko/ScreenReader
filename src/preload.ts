@@ -1,9 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import type { RendererAPI } from './types/ipc';
 
-const api: RendererAPI = {
+const rendererAPI: RendererAPI = {
   ping: () => ipcRenderer.invoke('ping'),
-  sendFile: (arg:ArrayBuffer) => ipcRenderer.invoke('SendFile', arg)
+  processImage: (arrayBuffer:ArrayBuffer) => ipcRenderer.invoke('sendImage', arrayBuffer)
 };
 
-contextBridge.exposeInMainWorld("api", api);
+contextBridge.exposeInMainWorld("rendererAPI", rendererAPI);
