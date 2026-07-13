@@ -9,11 +9,9 @@ function assertExists<T>(element:T | null | undefined, message:string):asserts e
     if(element == null || element == undefined) throw new Error(message);
 }
 
-function getHTMLInputFile(input:HTMLInputElement):File{
-    const file = input.files?.[0];
-    if(!file){
-        throw new Error('No file in input')
-    }
+function getInputFile(fileSource:HTMLInputElement | DataTransfer):File{
+    const file = fileSource.files?.[0];
+    assertExists(file,'No file in input');
     return file
 }
 
@@ -34,10 +32,15 @@ function showPreview(file:File, place:HTMLDivElement){
     renderImage(image, place)
 }
 
-async function sendImageToMainProcess(image:File){
-    let buffer = await image.arrayBuffer();
-    const answer = await window.rendererAPI.processImage(buffer)
+async function sendImageToMainProcess(file:File){
+    const buffer = await file.arrayBuffer();
+    const answer = await window.rendererAPI.sendImageForProcessing(buffer)
     console.log(answer)
+}
+
+async function handleFile(file:File, preview:HTMLDivElement){
+    showPreview(file, preview);
+    await sendImageToMainProcess(file)
 }
 
 const {input, preview} = getHTMLElements();
@@ -46,9 +49,8 @@ assertExists(input, 'Can not find input element on HTML page');
 assertExists(preview, 'Can not find preview element on HTML page');
 
 input.addEventListener('change', () => {
-    const file = getHTMLInputFile(input);
-    showPreview(file, preview);
-    sendImageToMainProcess(file);
+    const file = getInputFile(input);
+    handleFile(file, preview);
 });
 
 preview.addEventListener('dragover', (event) => {
@@ -67,8 +69,7 @@ preview.addEventListener('dragleave', () => {
 preview.addEventListener('drop', (event) => {
     event.preventDefault();
     preview.classList.remove('dragging')
-    const file = event.dataTransfer?.files[0];
-    assertExists(file, 'file not found')
-    showPreview(file, preview);
-    sendImageToMainProcess(file);
+    assertExists(event.dataTransfer, 'Nothing had dropped')
+    const file = getInputFile(event.dataTransfer)
+    handleFile(file, preview);
 });
