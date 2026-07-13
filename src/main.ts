@@ -13,17 +13,18 @@ const createWindow = () => {
   win.loadFile('index.html')
 }
 
-app.whenReady().then(() => {
-  ipcMain.handle('ping', () => 'pong')
-  createWindow()
+app.whenReady().then(createWindow);
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
-  })
+ipcMain.handle('ping', () => 'pong');
+ipcMain.handle('SendFile', (_event, arrayBuffer:ArrayBuffer ) => {
+  return arrayBuffer.byteLength
 })
 
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
+})
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
