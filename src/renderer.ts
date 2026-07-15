@@ -12,11 +12,11 @@ function assertExists<T>(element:T | null | undefined, message:string):asserts e
 function getInputFile(fileSource:HTMLInputElement | DataTransfer):File{
     const file = fileSource.files?.[0];
     assertExists(file,'No file in input');
-    return file
+    return file;
 }
 
 function renderImage(image:HTMLImageElement, place:HTMLDivElement){
-    place.replaceChildren(image)
+    place.replaceChildren(image);
 }
 
 function createImage(file:File) : HTMLImageElement {
@@ -24,23 +24,23 @@ function createImage(file:File) : HTMLImageElement {
     const imageURL = URL.createObjectURL(file);
     image.onload = () => URL.revokeObjectURL(imageURL);
     image.src = imageURL;
-    return image
+    return image;
 }
 
 function showPreview(file:File, place:HTMLDivElement){
     const image = createImage(file);
-    renderImage(image, place)
+    renderImage(image, place);
 }
 
 async function sendImageToMainProcess(file:File){
     const buffer = await file.arrayBuffer();
-    const answer = await window.rendererAPI.sendImageForProcessing(buffer)
-    console.log(answer)
+    const answer = await window.rendererAPI.sendImageForProcessing(buffer);
+    console.log(answer);
 }
 
 async function handleFile(file:File, preview:HTMLDivElement){
     showPreview(file, preview);
-    await sendImageToMainProcess(file)
+    await sendImageToMainProcess(file);
 }
 
 const {input, preview} = getHTMLElements();
@@ -68,8 +68,8 @@ preview.addEventListener('dragleave', () => {
 
 preview.addEventListener('drop', (event) => {
     event.preventDefault();
-    preview.classList.remove('dragging')
-    assertExists(event.dataTransfer, 'Nothing had dropped')
-    const file = getInputFile(event.dataTransfer)
+    preview.classList.remove('dragging');
+    assertExists(event.dataTransfer, 'Nothing had dropped');
+    const file = getInputFile(event.dataTransfer);
     handleFile(file, preview);
 });

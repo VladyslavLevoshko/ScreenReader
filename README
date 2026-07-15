@@ -5,6 +5,7 @@ Below I`ll write some add infromation which can be important.
 
 IPC calls returns promises.
 21 vulnerabilities (3 low, 18 high) was added from Electron Forge CLI
+6 more from BlinkID
 
 makers: [
   {

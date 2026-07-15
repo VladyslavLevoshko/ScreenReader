@@ -1,6 +1,10 @@
 import {app, BrowserWindow, ipcMain} from 'electron'
 import path from 'path'
 
+import "dotenv/config"
+const key = process.env.LICENSE_KEY;
+
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 700,
