@@ -1,5 +1,4 @@
-console.log("renderer started");
-console.log(window.rendererAPI);
+import { arrayBufferToImageData, init } from "../scanners/mikroblink"
 
 function getHTMLElements() {
     return {
@@ -38,6 +37,11 @@ function showPreview(file:File, place:HTMLDivElement){
 async function sendImageToMainProcess(file:File){
     const buffer = await file.arrayBuffer();
     const answer = await window.rendererAPI.sendImageForProcessing(buffer);
+    const preprocessedImage = await arrayBufferToImageData(buffer);
+    const session = await init();
+    await session.process(preprocessedImage);
+    const result = await session.getResult();
+    console.log(result);
     console.log(answer);
 }
 
