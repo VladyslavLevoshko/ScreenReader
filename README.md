@@ -1,34 +1,5 @@
-# mvpelectronapp
+есть проблема с подгрузкой вокрера после сборки. Подозреваю путь к ресурсам в микроблинке
+    resourcesLocation: "http://localhost:5173/resources",
+после сборки локальный сервер вайта пропадает и не удается найти файл. На виндовс после сборки и запуска все ок, начинаем сканировать => net::ERR_CONNECTION_REFUSED
 
-A minimal Electron application with TypeScript
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-## Project Setup
-
-### Install
-
-```bash
-$ npm install
-```
-
-### Development
-
-```bash
-$ npm run dev
-```
-
-### Build
-
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
-```
+ключ микроблинка должен браться из главного процесса
