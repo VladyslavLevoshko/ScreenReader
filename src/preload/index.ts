@@ -2,12 +2,12 @@ import { contextBridge, ipcRenderer } from 'electron';
 import preload from '@electron-toolkit/preload'
 
 export interface RendererAPI {
-  ping: () => Promise<string>,
+  initMainScanner: () => Promise<string>,
   sendImageForProcessing: (image:ArrayBuffer) => Promise<string>
 }
 
 const rendererAPI: RendererAPI = {
-  ping: () => ipcRenderer.invoke('ping'),
+  initMainScanner: () => ipcRenderer.invoke('initMainScanner'),
   sendImageForProcessing: (arrayBuffer:ArrayBuffer) => ipcRenderer.invoke('sendImage', arrayBuffer)
 };
 

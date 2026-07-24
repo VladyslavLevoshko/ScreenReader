@@ -1,6 +1,8 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { MainScannerEngine } from "../scanners/MainProcess"
+import { Scanner } from "../scanners/Shared"
 
 function createWindow(){
   const mainWindow = new BrowserWindow({
@@ -32,10 +34,14 @@ function createWindow(){
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
+  let scanner: Scanner | null = null;
 
-  ipcMain.handle('ping', () => 'pong');
+  ipcMain.handle('initMainScanner', () => {
+    scanner = new Scanner(new MainScannerEngine())
+  });
+
   ipcMain.handle('sendImage', (_event, arrayBuffer:ArrayBuffer ) => {
-    return arrayBuffer.byteLength
+    return scanner?.scan(arrayBuffer)
   });
 
   createWindow();

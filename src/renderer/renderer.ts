@@ -35,7 +35,8 @@ function showPreview(file:File, place:HTMLDivElement){
 }
 
 async function sendImageToMainProcess(file:File){
-    const result = scanner.scan(file);
+    const arrayBuffer = await file.arrayBuffer()
+    const result = await scanner.scan(arrayBuffer);
     console.log(result)
 }
 

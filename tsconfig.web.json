@@ -1,6 +1,7 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
-  "include": ["src/renderer/**/*.ts", "src/preload/*.d.ts", "src/types/**/*.ts", "src/services/**/*.ts",],
+  "include": ["src/renderer/**/*.ts", "src/preload/*.d.ts", "src/services/**/*.ts", "src/scanners/**/*.ts"],
+  "exclude": ["src/scanners/MainProcessScanners/**/*.ts"],
   "compilerOptions": {
     "composite": true
   }

@@ -1,12 +1,20 @@
-import {Scanner, ScannerEngine, MicroblinkScannerEngine, MainScannerEngine} from "../renderer/scanners";
+import { MicroblinkScannerEngine, MainProcessScannerProxy } from "../scanners/RendererProcess";
+import { Scanner } from "../scanners/Shared";
 
+const scannerMode = "microblink"
 
-const scannerMode = new MicroblinkScannerEngine()
+async function createScanner(mode: "microblink" | "mainprocess") {
+    switch (mode) {
+        case "microblink":
+            return new Scanner(new MicroblinkScannerEngine());
 
+        case "mainprocess":
+            await window.rendererAPI.initMainScanner();
+            return new Scanner(new MainProcessScannerProxy());
 
-function createScanner(mode:ScannerEngine) {
-    return new Scanner(mode)
+        default:
+            throw new Error("Unknown scanner mode");
+    }
 }
 
-
-export const scanner = createScanner(scannerMode);
+export const scanner = await createScanner(scannerMode);

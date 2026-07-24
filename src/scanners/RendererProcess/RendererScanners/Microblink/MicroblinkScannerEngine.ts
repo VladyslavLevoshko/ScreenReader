@@ -1,10 +1,11 @@
-import { ScannerEngine } from "./ScannerEngine";
+import { ScannerEngine } from "../../../Shared/ScannerEngine";
 import { loadBlinkIdCore } from "@microblink/blinkid-core";
 
 export class MicroblinkScannerEngine extends ScannerEngine{
-    async scan(file:File){
-        async function preprocessedImage(file){
-            const url = URL.createObjectURL(file);
+    async scan(buffer:ArrayBuffer){
+        async function preprocessedImage(buffer:ArrayBuffer){
+            const blob = new Blob( [buffer], { type: "image/jpeg" });
+            const url = URL.createObjectURL(blob);
             const img = new Image();
             img.src = url;
             try {
@@ -26,7 +27,7 @@ export class MicroblinkScannerEngine extends ScannerEngine{
         async function init(){
             const blinkIdCore = await loadBlinkIdCore({
                 licenseKey: import.meta.env.VITE_MICROBLINK_KEY,
-                resourcesLocation: "http://localhost:5173/resources",
+                resourcesLocation: "./",
             });
             const session = await blinkIdCore.createScanningSession({
                 inputImageSource: "photo",
@@ -36,7 +37,7 @@ export class MicroblinkScannerEngine extends ScannerEngine{
         }
 
         const session = await init();
-        const preImage = await preprocessedImage(file)
+        const preImage = await preprocessedImage(buffer)
         await session.process(preImage);
         const result = await session.getResult();
         console.log(result)
