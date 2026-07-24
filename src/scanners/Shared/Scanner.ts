@@ -6,7 +6,7 @@ export class Scanner {
         this.scannerEngine = scannerEngine;
     }
 
-    async scan(file:ArrayBuffer){
-        return await this.scannerEngine.scan(file)
+    async scan(buffer:ArrayBuffer){
+        return await this.scannerEngine.scan(buffer)
     }
 }

@@ -1,3 +1,3 @@
 export abstract class ScannerEngine {
-    abstract scan(arrayBuffer:ArrayBuffer): Promise<any>
+    abstract scan(buffer:ArrayBuffer): Promise<any>
 }

@@ -34,15 +34,15 @@ function showPreview(file:File, place:HTMLDivElement){
     renderImage(image, place);
 }
 
-async function sendImageToMainProcess(file:File){
+async function scan(file:File){
     const arrayBuffer = await file.arrayBuffer()
-    const result = await scanner.scan(arrayBuffer);
-    console.log(result)
+    return await scanner.scan(arrayBuffer);
 }
 
 async function handleFile(file:File, preview:HTMLDivElement){
     showPreview(file, preview);
-    await sendImageToMainProcess(file);
+    const result = await scan(file);
+    console.log(result)
 }
 
 const {input, preview} = getHTMLElements();

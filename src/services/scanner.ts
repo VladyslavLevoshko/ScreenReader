@@ -1,7 +1,7 @@
 import { MicroblinkScannerEngine, MainProcessScannerProxy } from "../scanners/RendererProcess";
 import { Scanner } from "../scanners/Shared";
 
-const scannerMode = "microblink"
+const scannerMode = "mainprocess"
 
 async function createScanner(mode: "microblink" | "mainprocess") {
     switch (mode) {
