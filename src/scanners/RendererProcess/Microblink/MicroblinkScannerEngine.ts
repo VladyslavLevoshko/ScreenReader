@@ -1,4 +1,4 @@
-import { ScannerEngine } from "../../../Shared/ScannerEngine";
+import { ScannerEngine } from "../../Shared/ScannerEngine";
 import { loadBlinkIdCore } from "@microblink/blinkid-core";
 
 export class MicroblinkScannerEngine extends ScannerEngine{
@@ -27,7 +27,7 @@ export class MicroblinkScannerEngine extends ScannerEngine{
         async function init(){
             const blinkIdCore = await loadBlinkIdCore({
                 licenseKey: import.meta.env.VITE_MICROBLINK_KEY,
-                resourcesLocation: "./",
+                resourcesLocation: "http://localhost:3000",
             });
             const session = await blinkIdCore.createScanningSession({
                 inputImageSource: "photo",

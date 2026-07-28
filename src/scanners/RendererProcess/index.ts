@@ -1,2 +1,2 @@
-export * from "./RendererProxys/MainProcessScannerProxy";
-export * from "./RendererScanners/Microblink/MicroblinkScannerEngine";
+export * from "./Microblink/MainProcessScannerProxy";
+export * from "./Microblink/MicroblinkScannerEngine";

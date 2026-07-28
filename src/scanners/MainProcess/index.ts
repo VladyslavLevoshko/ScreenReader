@@ -1,1 +1,1 @@
-export * from "./MainProcessScanners/MainProcessScannerEngine";
+export * from "./MainProcessScannerEngine";

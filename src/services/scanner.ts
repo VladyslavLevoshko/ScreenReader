@@ -1,11 +1,12 @@
 import { MicroblinkScannerEngine, MainProcessScannerProxy } from "../scanners/RendererProcess";
 import { Scanner } from "../scanners/Shared";
 
-const scannerMode = "mainprocess"
+const scannerMode = "microblink"
 
 async function createScanner(mode: "microblink" | "mainprocess") {
     switch (mode) {
         case "microblink":
+            //инициализация ресурсного сервера микроблинка
             return new Scanner(new MicroblinkScannerEngine());
 
         case "mainprocess":
