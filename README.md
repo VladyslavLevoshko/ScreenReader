@@ -6,3 +6,5 @@
 
 индекс html навести порядок:
       content="connect-src *; default-src 'self'; script-src 'self' blob: 'wasm-unsafe-eval'; worker-src 'self' blob:; img-src 'self' data: blob:"    />
+
+./out/renderer не паковать в asar, оставить в blinkid/resources рядом с джс-воркером, сервер берет и раздает как статический файл рэндрер процесс, берет и раздает как статический файл блинайди ресурсы. 

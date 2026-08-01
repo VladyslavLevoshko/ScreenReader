@@ -1,15 +1,21 @@
 import { ipcMain } from "electron";
 import { Scanner } from "../../scanners/Shared";
 import { MainScannerEngine } from "../../scanners/MainProcess";
+import { BlinkIdResourceServer } from "../../scanners/MainProcess/MicroblinkResourceServer";
 
 export function registerScannerIPC(){
     let scanner:Scanner | null = null;
 
     ipcMain.handle('initMainScanner', () => {
-    scanner = new Scanner(new MainScannerEngine())
+        scanner = new Scanner(new MainScannerEngine())
     });
 
     ipcMain.handle('sendImage', (_event, arrayBuffer:ArrayBuffer ) => {
-    return scanner?.scan(arrayBuffer)
+        return scanner?.scan(arrayBuffer)
     });
+
+    ipcMain.handle('initMicroblinkResourceServer', async () => {
+        const blinkServer = new BlinkIdResourceServer();
+        await blinkServer.start()
+    })
 }

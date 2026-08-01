@@ -40,7 +40,6 @@ export class MicroblinkScannerEngine extends ScannerEngine{
         const preImage = await preprocessedImage(buffer)
         await session.process(preImage);
         const result = await session.getResult();
-        console.log(result)
         return result
     }
 }

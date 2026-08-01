@@ -6,7 +6,7 @@ const scannerMode = "microblink"
 async function createScanner(mode: "microblink" | "mainprocess") {
     switch (mode) {
         case "microblink":
-            //инициализация ресурсного сервера микроблинка
+            window.rendererAPI.initMicroblinkResourceServer();
             return new Scanner(new MicroblinkScannerEngine());
 
         case "mainprocess":
