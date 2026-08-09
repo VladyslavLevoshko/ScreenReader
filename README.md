@@ -1,10 +1,13 @@
-есть проблема с подгрузкой вокрера после сборки. Подозреваю путь к ресурсам в микроблинке
-    resourcesLocation: "http://localhost:5173/resources",
-после сборки локальный сервер вайта пропадает и не удается найти файл. На виндовс после сборки и запуска все ок, начинаем сканировать => net::ERR_CONNECTION_REFUSED
+PasScanApp is a full-stack Electron application for reading documents, demonstrating the integration of scanners based on two different processing workflows.
 
-ключ микроблинка должен браться из главного процесса
+Problem:
 
-индекс html навести порядок:
-      content="connect-src *; default-src 'self'; script-src 'self' blob: 'wasm-unsafe-eval'; worker-src 'self' blob:; img-src 'self' data: blob:"    />
+Business can require different scanner solutions depending on operational needs, cost efficiency, and the feasibility of using third-party libraries.
 
-./out/renderer не паковать в asar, оставить в blinkid/resources рядом с джс-воркером, сервер берет и раздает как статический файл рэндрер процесс, берет и раздает как статический файл блинайди ресурсы. 
+Solution:
+
+A Scanner Factory and Proxy pattern were implemented to provide a unified interface between the client application and different scanner implementations.
+
+Result:
+
+An extensible and maintainable foundation that allows new scanners to be integrated with minimal changes to the client-side logic.
