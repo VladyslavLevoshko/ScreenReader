@@ -1,4 +1,4 @@
-ScreenReader is a full-stack Electron application for reading documents, demonstrating the integration of scanners based on two different processing workflows.
+### ScreenReader is a full-stack Electron application for reading documents, demonstrating the integration of scanners based on two different processing workflows.
 
 🔴 Problem
 
