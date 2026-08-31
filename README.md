@@ -6,7 +6,7 @@ Business can require different scanner solutions depending on operational needs,
 
 🟢 Solution
 
-A Scanner Factory and Proxy pattern were implemented to provide a unified interface between the client application and different scanner implementations.
+Unified interface between the client application and different scanner implementations.
 
 🔵 Result
 
